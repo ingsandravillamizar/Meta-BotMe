@@ -1,0 +1,12 @@
+listar dependencias usadas
+pip freeze > requirements.txt
+
+instalar dependencias
+pip install -r requirements.txt
+
+
+python -m venv env
+env\Scripts\activate
+
+
+
