@@ -1,10 +1,19 @@
 # message_handler.py
 import requests
-from config import API_URL, USER_ACCESS_TOKEN, RECIPIENT_PHONE_NUMBER
+from config import ACCESS_TOKEN, API_URL
+
+def handle_message(data):
+    if "messages" in data.get("entry", [])[0].get("changes", [])[0].get("value", {}):
+        message = data['entry'][0]['changes'][0]['value']['messages'][0]
+        sender_id = message['from']
+        text = message.get('text', {}).get('body', '')
+
+        print(f"Mensaje de {sender_id}: {text}")
+        send_message(sender_id, f"Recibí tu mensaje: {text}")
 
 def send_message(recipient_id, message_text):
     headers = {
-        "Authorization": f"Bearer {USER_ACCESS_TOKEN}",
+        "Authorization": f"Bearer {ACCESS_TOKEN}",
         "Content-Type": "application/json"
     }
     data = {

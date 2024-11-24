@@ -13,6 +13,7 @@ def webhook():
         # Verificación del webhook
         token = request.args.get('hub.verify_token')
         challenge = request.args.get('hub.challenge')
+        
         if token == VERIFY_TOKEN:
             return challenge, 200
         return "Token no válido", 403
