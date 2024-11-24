@@ -1,6 +1,6 @@
 # message_handler.py
 import requests
-from config import ACCESS_TOKEN, API_URL
+from config import USER_ACCESS_TOKEN, API_URL
 
 def handle_message(data):
     if "messages" in data.get("entry", [])[0].get("changes", [])[0].get("value", {}):
@@ -13,7 +13,7 @@ def handle_message(data):
 
 def send_message(recipient_id, message_text):
     headers = {
-        "Authorization": f"Bearer {ACCESS_TOKEN}",
+        "Authorization": f"Bearer {USER_ACCESS_TOKEN}",
         "Content-Type": "application/json"
     }
     data = {
