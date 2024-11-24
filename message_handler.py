@@ -3,6 +3,8 @@ import requests
 from config import USER_ACCESS_TOKEN, API_URL
 
 def handle_message(data):
+
+    print (API_URL)
     if "messages" in data.get("entry", [])[0].get("changes", [])[0].get("value", {}):
         message = data['entry'][0]['changes'][0]['value']['messages'][0]
         sender_id = message['from']

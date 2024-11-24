@@ -26,8 +26,8 @@ def recibir_mensajes():
  
         data = request.get_json()
         print("Mensaje recibido:", data)
-        return 'enviado'
+        #return 'enviado'
         # Enviar a message_handler para procesar
-        #from message_handler import handle_message
-        #handle_message(data)
-        #return jsonify({"status": "received"}), 200
+        from message_handler import handle_message
+        handle_message(data)
+        return jsonify({"status": "received"}), 200
