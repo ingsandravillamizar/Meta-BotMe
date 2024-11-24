@@ -23,7 +23,12 @@ def send_message(recipient_id, message_text):
         "to": recipient_id,
         "text": {"body": message_text}
     }
+    print(f"API_URL: {API_URL}")
+    print(f"Headers: {headers}")
+    print(f"Payload: {data}")
     response = requests.post(API_URL, json=data, headers=headers)
+    print(f"Response status code: {response.status_code}")
+    print(f"Response text: {response.text}")
     if response.status_code == 200:
         print("Mensaje enviado correctamente")
     else:
