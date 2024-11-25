@@ -26,6 +26,18 @@ def recibir_mensajes():
  
         data = request.get_json()
         print("Mensaje recibido:", data)
+        # body = request.get_json()
+        # entry = body['entry'][0]
+        # changes = entry['changes'][0]
+        # value = changes['value']
+        # message = value['messages'][0]
+        # number = message['from']
+        # messageId = message['id']
+        # contacts = value['contacts'][0]
+        # name = contacts['profile']['name']
+        # text = services.obtener_mensaje_whatsapp(message)
+
+
         #return 'enviado'
         # Enviar a message_handler para procesar
         from message_handler import handle_message
