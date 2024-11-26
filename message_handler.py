@@ -3,7 +3,7 @@ import requests
 from config import USER_ACCESS_TOKEN, API_URL
 
 def handle_message(data):
-    
+
     if "messages" in data.get("entry", [])[0].get("changes", [])[0].get("value", {}):
         # Extraer el mensaje
         message = data['entry'][0]['changes'][0]['value']['messages'][0]
@@ -41,28 +41,31 @@ def handle_message(data):
 
 
 def send_message(recipient_id, message_text):
-    headers = {
+
+    try:
+
+        headers = {
         "Authorization": f"Bearer {USER_ACCESS_TOKEN}",
         "Content-Type": "application/json"
-    }
-    data = {
-        "messaging_product": "whatsapp",
-        "to": recipient_id,
-        "text": {"body": message_text}
-    }
-    print(f"API_URL: {API_URL}")
-    print(f"Headers: {headers}")
-    print(f"Payload: {data}")
-    response = requests.post(API_URL, json=data, headers=headers)
-    print(f"Response status code: {response.status_code}")
-    print(f"Response text: {response.text}")
-    if response.status_code == 200:
-        print("Mensaje enviado correctamente")
-    else:
-        print(f"Error al enviar el mensaje: {response.status_code}, {response.text}")
+        }
+        data = {
+            "messaging_product": "whatsapp",
+            "to": recipient_id,
+            "text": {"body": message_text}
+        }
+        # print(f"API_URL: {API_URL}")
+        # print(f"Headers: {headers}")
+        # print(f"Payload: {data}")
+        response = requests.post(API_URL, json=data, headers=headers)
+        # print(f"Response status code: {response.status_code}")
+        # print(f"Response text: {response.text}")
+        if response.status_code == 200:
+            print("Mensaje enviado correctamente")
+        else:
+            print(f"Error al enviar el mensaje: {response.status_code}, {response.text}")
 
-
- 
+    except Exception as e:
+        return e, 403
 
 # Tipos de mensaje que se reciben
 # Texto: El mensaje tendrá el campo "text".
@@ -70,3 +73,4 @@ def send_message(recipient_id, message_text):
 # Audio: El mensaje tendrá el campo "audio".
 # Video: El mensaje tendrá el campo "video".
 # Sticker: El mensaje tendrá el campo "sticker".
+# validar cuando si va a recibir pdf, docs, excel et...  
